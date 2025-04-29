@@ -1,24 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html, body {
-  height: 100%;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #0b0b0b;
+  color: #00ffde;
   font-family: 'Press Start 2P', monospace;
-  background-color: #0b0b0b;
   background-image:
     repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 20px),
     repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 20px);
   background-size: 20px 20px;
-  color: #00ffde;
 }
 
 #title {
@@ -27,19 +21,14 @@ body {
   text-shadow: 0 0 15px #00ffde;
 }
 
-#game-container {
-  position: relative;
-}
+#game-container { position: relative; }
 
 canvas {
   width: 300px;
   height: 600px;
   background: rgba(17,17,17,0.85);
   border: 4px solid #00ffde;
-  box-shadow:
-    0 0 30px rgba(0,255,222,0.6),
-    inset 0 0 15px rgba(255,0,255,0.4);
-  display: block;
+  box-shadow: 0 0 30px rgba(0,255,222,0.6), inset 0 0 15px rgba(255,0,255,0.4);
 }
 
 #scoreboard {
@@ -53,78 +42,70 @@ canvas {
 #controls {
   position: absolute;
   top: 12px;
-  left: -300px;
-  width: 280px;
-  text-align: left;
-  z-index: 2;
+  left: -320px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
+
+#controls input, #controls select {
+  padding: 6px;
+  font-size: 0.8rem;
+  border: 2px solid #00ffde;
+  background: transparent;
+  color: #00ffde;
+  text-shadow: 0 0 3px rgba(0,255,222,0.7);
+}
+
+#controls button {
+  padding: 6px;
+  font-size: 0.8rem;
+  background: #00ffde;
+  color: #0b0b0b;
+  border: none;
+  cursor: pointer;
+}
+
+#controls button:hover { background: #0dc2ff; }
 
 .profile-select-wrapper {
   display: flex;
   gap: 4px;
 }
+
 .profile-select-wrapper select {
   flex: 1;
-  padding: 10px;
-  font-size: 1.2rem;
-  border: 2px solid #00ffde;
-  background: rgba(17,17,17,0.85);
-  color: #00ffde;
-  text-shadow: 0 0 3px rgba(0,255,222,0.7);
 }
-#deleteProfile {
-  width: 18px;
-  height: 18px;
-  font-size: 0.6rem;
-  line-height: 1;
-  padding: 2px;
+
+.profile-select-wrapper button {
+  width: 30px;
   background: red;
   color: #fff;
   border: none;
   cursor: pointer;
 }
 
-#controls button {
-  display: block;
-  width: 100%;
-  margin-bottom: 8px;
-  padding: 6px;
-  font-size: 0.8rem;
-  border: none;
-  background: #00ffde;
-  color: #0b0b0b;
-  cursor: pointer;
-}
-#controls button:hover {
-  background: #0dc2ff;
-}
-
 #mode-select label {
   display: block;
   font-size: 0.8rem;
-  margin-bottom: 4px;
   cursor: pointer;
 }
 
 #leaderboard {
   position: absolute;
   top: 12px;
-  right: -300px;
-  width: 280px;
-  text-align: left;
-  z-index: 2;
+  right: -360px;
+  width: 300px;
 }
+
 #leaderboard h2 {
   font-size: 1.1rem;
-  margin-bottom: 8px;
   text-shadow: 0 0 6px rgba(0,255,222,0.7);
 }
+
 #leaderboard ol {
   padding-left: 20px;
-}
-#leaderboard li {
-  font-size: 0.8rem;
-  margin-bottom: 6px;
 }
 
 #instructions {
@@ -132,21 +113,31 @@ canvas {
   bottom: 12px;
   left: 100%;
   margin-left: 12px;
-  text-align: center;
+  max-width: 200px;
 }
+
 #instructions h3 {
-  margin-bottom: 6px;
-  font-size: 1rem;
-  text-shadow: 0 0 5px rgba(0,255,222,0.7);
+  font-size: 1.2rem;
+  text-shadow: 0 0 6px rgba(0,255,222,0.7);
 }
+
+.instruction-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
 #instructions kbd {
-  display: inline-block;
-  padding: 4px 6px;
-  margin-right: 4px;
-  font-size: 0.8rem;
+  padding: 6px 8px;
+  font-size: 1rem;
   border: 2px solid #00ffde;
   border-radius: 4px;
   text-shadow: 0 0 3px rgba(0,255,222,0.7);
+}
+
+#instructions span {
+  font-size: 0.8rem;
 }
 
 #gameOver {
@@ -155,41 +146,14 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 4rem;
   color: red;
-  text-shadow: 0 0 25px red;
+  font-size: 6rem;
+  text-shadow: 0 0 30px red;
   pointer-events: none;
-  z-index: 3;
   animation: pulse 1s ease-in-out infinite alternate;
 }
 
 @keyframes pulse {
   from { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  to   { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
-}
-
-#touch-controls {
-  display: none;
-  gap: 10px;
-  margin-top: 20px;
-  justify-content: center;
-}
-#touch-controls button {
-  font-size: 1.4rem;
-  padding: 12px 18px;
-  background: #00ffde;
-  color: #0b0b0b;
-  border: none;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(0,255,222,0.5);
-  cursor: pointer;
-}
-
-@media (max-width: 600px) {
-  #controls, #leaderboard, #instructions {
-    display: none;
-  }
-  #touch-controls {
-    display: flex;
-  }
+  to { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
 }
