@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retro Tetris</title>
-  <link rel="stylesheet" href="style.css?v=1.4" />
+  <link rel="stylesheet" href="style.css?v=1.5" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     html, body {
@@ -116,16 +116,16 @@
     <canvas id="tetris" width="300" height="600"></canvas>
 
     <div id="touch-controls">
-      <button id="btn-left">◀</button>
-      <button id="btn-down">▼</button>
-      <button id="btn-right">▶</button>
-      <button id="btn-rotate">⟳</button>
+      <button id="btn-left" onclick="playerMove(-1)">◀</button>
+      <button id="btn-down" onclick="playerDrop()">▼</button>
+      <button id="btn-right" onclick="playerMove(1)">▶</button>
+      <button id="btn-rotate" onclick="playerRotate(1)">⟳</button>
     </div>
 
     <div id="mobile-buttons">
-      <button id="startBtn">Start</button>
-      <button id="restartBtn">Neustart</button>
-      <button id="quitBtn">Beenden</button>
+      <button id="startBtn" onclick="startGame()">Start</button>
+      <button id="restartBtn" onclick="restartGame()">Neustart</button>
+      <button id="quitBtn" onclick="endGame(true)">Beenden</button>
     </div>
 
     <div id="leaderboard">
