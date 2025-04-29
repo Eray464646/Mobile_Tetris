@@ -18,7 +18,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      touch-action: none;
+      touch-action: manipulation;
     }
 
     #game-container {
@@ -110,23 +110,23 @@
     }
   </style>
 </head>
-<body tabindex="0">
+<body>
   <div id="game-container">
     <h1 id="title">TETRIS</h1>
     <div id="scoreboard">Punkte: <span id="score">0</span></div>
     <canvas id="tetris" width="300" height="600"></canvas>
 
     <div id="touch-controls">
-      <button id="btn-left" onclick="playerMove(-1)">◀</button>
-      <button id="btn-down" onclick="playerDrop()">▼</button>
-      <button id="btn-right" onclick="playerMove(1)">▶</button>
-      <button id="btn-rotate" onclick="playerRotate(1)">⟳</button>
+      <button id="btn-left">◀</button>
+      <button id="btn-down">▼</button>
+      <button id="btn-right">▶</button>
+      <button id="btn-rotate">⟳</button>
     </div>
 
     <div id="mobile-buttons">
-      <button onclick="startGame()">Start</button>
-      <button onclick="restartGame()">Neustart</button>
-      <button onclick="endGame(true)">Beenden</button>
+      <button id="startBtn">Start</button>
+      <button id="restartBtn">Neustart</button>
+      <button id="quitBtn">Beenden</button>
     </div>
 
     <div id="leaderboard">
@@ -136,8 +136,17 @@
 
     <div id="gameOver">Idiot</div>
   </div>
+
   <script>
-    let dropInterval = 600; // schneller als Standard (vorher z.B. 1000ms)
+    document.getElementById('btn-left').addEventListener('click', () => playerMove(-1));
+    document.getElementById('btn-right').addEventListener('click', () => playerMove(1));
+    document.getElementById('btn-down').addEventListener('click', () => playerDrop());
+    document.getElementById('btn-rotate').addEventListener('click', () => playerRotate(1));
+    document.getElementById('startBtn').addEventListener('click', () => startGame());
+    document.getElementById('restartBtn').addEventListener('click', () => restartGame());
+    document.getElementById('quitBtn').addEventListener('click', () => endGame(true));
+
+    let dropInterval = 600; // schneller als Standard
   </script>
   <script src="script.js"></script>
 </body>
