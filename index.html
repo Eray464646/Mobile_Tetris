@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Retro Tetris</title>
-  <link rel="stylesheet" href="style.css?v=1.7" />
+  <link rel="stylesheet" href="style.css?v=1.8" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     html, body {
@@ -133,19 +133,21 @@
     <div id="gameOver">Idiot</div>
   </div>
 
+  <script src="script.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    let dropInterval = 600; // schnellere Geschwindigkeit
+
+    // Button-Zuweisung sicherstellen
+    window.addEventListener("load", () => {
       document.getElementById('btn-left')?.addEventListener('click', () => playerMove(-1));
       document.getElementById('btn-right')?.addEventListener('click', () => playerMove(1));
       document.getElementById('btn-down')?.addEventListener('click', () => playerDrop());
       document.getElementById('btn-rotate')?.addEventListener('click', () => playerRotate(1));
+
       document.getElementById('startBtn')?.addEventListener('click', () => startGame());
-      document.getElementById('restartBtn')?.addEventListener('click', () => restartGame());
+      document.getElementById('restartBtn')?.addEventListener('click', () => startGame());
       document.getElementById('quitBtn')?.addEventListener('click', () => endGame(true));
     });
-
-    let dropInterval = 600;
   </script>
-  <script src="script.js"></script>
 </body>
 </html>
