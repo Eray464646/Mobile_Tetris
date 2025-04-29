@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Retro Tetris</title>
-  <link rel="stylesheet" href="style.css?v=1.5" />
+  <link rel="stylesheet" href="style.css?v=1.6" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     html, body {
@@ -18,6 +18,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      touch-action: none;
     }
 
     #game-container {
@@ -123,9 +124,9 @@
     </div>
 
     <div id="mobile-buttons">
-      <button id="startBtn" onclick="startGame()">Start</button>
-      <button id="restartBtn" onclick="restartGame()">Neustart</button>
-      <button id="quitBtn" onclick="endGame(true)">Beenden</button>
+      <button onclick="startGame()">Start</button>
+      <button onclick="restartGame()">Neustart</button>
+      <button onclick="endGame(true)">Beenden</button>
     </div>
 
     <div id="leaderboard">
@@ -135,6 +136,9 @@
 
     <div id="gameOver">Idiot</div>
   </div>
+  <script>
+    let dropInterval = 600; // schneller als Standard (vorher z.B. 1000ms)
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
