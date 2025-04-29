@@ -9,109 +9,19 @@ if (!profiles.length) {
 }
 let currentProfile = profiles[0].name;
 
-const profileNameInput = document.getElementById('profileName');
-const createProfileBtn = document.getElementById('createProfile');
 const profileSelect = document.getElementById('profileSelect');
-const deleteProfileBtn = document.getElementById('deleteProfile');
-const startBtn = document.getElementById('startBtn');
-const restartBtn = document.getElementById('restartBtn');
-const quitBtn = document.getElementById('quitBtn');
-const modeEasy = document.getElementById('modeEasy');
-const modeHard = document.getElementById('modeHard');
-const modeImpossible = document.getElementById('modeImpossible');
 const scoresList = document.getElementById('scoresList');
 const gameOverEl = document.getElementById('gameOver');
 const scoreEl = document.getElementById('score');
-
-const EASY = 1000;
-const HARD = 200;
-const IMPOSSIBLE = 100;
-let dropInterval = EASY;
-let dropCounter = 0;
-let lastTime = 0;
-let isGameOver = false;
-let gameStarted = false;
 
 const arena = Array.from({ length: 20 }, () => Array(10).fill(0));
 const colors = [null, '#FF0D72', '#0DC2FF', '#0DFF72', '#F538FF', '#FF8E0D', '#FFE138', '#3877FF'];
 const player = { pos: { x: 0, y: 0 }, matrix: null, score: 0 };
 
-function renderProfiles() {
-  profileSelect.innerHTML = '';
-  profiles.forEach(p => {
-    const opt = document.createElement('option');
-    opt.value = p.name;
-    opt.textContent = p.name;
-    profileSelect.appendChild(opt);
-  });
-  profileSelect.value = currentProfile;
-}
-
-function renderLeaderboard() {
-  const sorted = [...profiles].sort((a, b) => b.highScore - a.highScore);
-  scoresList.innerHTML = '';
-  sorted.forEach(p => {
-    const li = document.createElement('li');
-    li.textContent = `${p.name}: ${p.highScore}`;
-    scoresList.appendChild(li);
-  });
-}
-
-renderProfiles();
-renderLeaderboard();
-
-createProfileBtn.addEventListener('click', () => {
-  const name = profileNameInput.value.trim();
-  if (!name || profiles.some(p => p.name === name)) return;
-  profiles.push({ name, highScore: 0 });
-  localStorage.setItem('tetrisProfiles', JSON.stringify(profiles));
-  currentProfile = name;
-  profileNameInput.value = '';
-  renderProfiles();
-  renderLeaderboard();
-});
-
-profileSelect.addEventListener('change', () => currentProfile = profileSelect.value);
-
-deleteProfileBtn.addEventListener('click', () => {
-  if (profiles.length <= 1) return;
-  profiles = profiles.filter(p => p.name !== currentProfile);
-  currentProfile = profiles[0].name;
-  localStorage.setItem('tetrisProfiles', JSON.stringify(profiles));
-  renderProfiles();
-  renderLeaderboard();
-});
-
-modeEasy.addEventListener('change', () => dropInterval = EASY);
-modeHard.addEventListener('change', () => dropInterval = HARD);
-modeImpossible.addEventListener('change', () => dropInterval = IMPOSSIBLE);
-
-startBtn.addEventListener('click', startGame);
-restartBtn.addEventListener('click', startGame);
-quitBtn.addEventListener('click', () => endGame(true));
-
-window.addEventListener('keydown', e => {
-  if (!gameStarted || isGameOver) return;
-  switch (e.key) {
-    case 'ArrowLeft': playerMove(-1); break;
-    case 'ArrowRight': playerMove(1); break;
-    case 'ArrowDown': playerDrop(); break;
-    case 'w': case 'W': playerRotate(1); break;
-  }
-});
-
-// Touch-Steuerung
-const btnLeft = document.getElementById('btn-left');
-const btnRight = document.getElementById('btn-right');
-const btnDown = document.getElementById('btn-down');
-const btnRotate = document.getElementById('btn-rotate');
-
-if (btnLeft && btnRight && btnDown && btnRotate) {
-  btnLeft.addEventListener('touchstart', e => { e.preventDefault(); playerMove(-1); });
-  btnRight.addEventListener('touchstart', e => { e.preventDefault(); playerMove(1); });
-  btnDown.addEventListener('touchstart', e => { e.preventDefault(); playerDrop(); });
-  btnRotate.addEventListener('touchstart', e => { e.preventDefault(); playerRotate(1); });
-}
+let dropCounter = 0;
+let lastTime = 0;
+let isGameOver = false;
+let gameStarted = false;
 
 function createPiece(type) {
   return {
@@ -146,9 +56,7 @@ function draw() {
 function collide(arena, player) {
   const [m, o] = [player.matrix, player.pos];
   return m.some((row, y) =>
-    row.some((v, x) =>
-      v && (arena[y + o.y]?.[x + o.x]) !== 0
-    )
+    row.some((v, x) => v && (arena[y + o.y]?.[x + o.x]) !== 0)
   );
 }
 
@@ -224,7 +132,7 @@ function playerReset() {
 }
 
 function update(time = 0) {
-  if (!gameStarted) return;
+  if (!gameStarted || isGameOver) return;
   const delta = time - lastTime;
   lastTime = time;
   dropCounter += delta;
@@ -234,7 +142,6 @@ function update(time = 0) {
 }
 
 function startGame() {
-  gameOverEl.style.display = 'none';
   isGameOver = false;
   gameStarted = true;
   dropCounter = 0;
@@ -242,16 +149,43 @@ function startGame() {
   arena.forEach(r => r.fill(0));
   player.score = 0;
   updateScore();
+  gameOverEl.style.display = 'none';
   playerReset();
   requestAnimationFrame(update);
 }
 
+function restartGame() {
+  startGame();
+}
+
 function endGame(quit = false) {
-  if (!quit) gameOverEl.style.display = 'block';
   isGameOver = true;
   gameStarted = false;
+  if (!quit) gameOverEl.style.display = 'block';
   const prof = profiles.find(p => p.name === currentProfile);
   if (player.score > prof.highScore) prof.highScore = player.score;
   localStorage.setItem('tetrisProfiles', JSON.stringify(profiles));
   renderLeaderboard();
 }
+
+function renderLeaderboard() {
+  const sorted = [...profiles].sort((a, b) => b.highScore - a.highScore);
+  scoresList.innerHTML = '';
+  sorted.forEach(p => {
+    const li = document.createElement('li');
+    li.textContent = `${p.name}: ${p.highScore}`;
+    scoresList.appendChild(li);
+  });
+}
+
+document.addEventListener('keydown', e => {
+  if (!gameStarted || isGameOver) return;
+  switch (e.key) {
+    case 'ArrowLeft': playerMove(-1); break;
+    case 'ArrowRight': playerMove(1); break;
+    case 'ArrowDown': playerDrop(); break;
+    case 'w': case 'W': playerRotate(1); break;
+  }
+});
+
+renderLeaderboard();
