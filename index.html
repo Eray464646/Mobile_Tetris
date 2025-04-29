@@ -4,107 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Retro Tetris</title>
-  <link rel="stylesheet" href="style.css?v=1.8" />
+  <link rel="stylesheet" href="style.css?v=2.0" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Press Start 2P', monospace;
-      background-color: #0b0b0b;
-      color: #00ffde;
-      height: 100vh;
-      overflow: hidden;
-      touch-action: none;
-    }
-
-    #game-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      width: 100vw;
-      height: 100vh;
-      box-sizing: border-box;
-      padding: 5px;
-    }
-
-    #title {
-      font-size: 1.2rem;
-      margin-bottom: 2px;
-      text-shadow: 0 0 4px #00ffde;
-    }
-
-    #scoreboard {
-      font-size: 0.7rem;
-    }
-
-    canvas {
-      width: 90vw;
-      max-width: 300px;
-      height: 50vh;
-      background: rgba(17, 17, 17, 0.85);
-      border: 3px solid #00ffde;
-      box-shadow: 0 0 10px #00ffde;
-    }
-
-    #touch-controls {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin: 8px 0;
-    }
-
-    #touch-controls button {
-      padding: 10px;
-      font-size: 1rem;
-      background: #00ffde;
-      border: none;
-      border-radius: 6px;
-      box-shadow: 0 0 5px #00ffde;
-      color: #000;
-    }
-
-    #mobile-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 6px;
-    }
-
-    #mobile-buttons button {
-      font-size: 0.7rem;
-      padding: 6px 10px;
-      background: #00ffde;
-      border: none;
-      border-radius: 4px;
-      color: #000;
-      box-shadow: 0 0 5px #00ffde;
-    }
-
-    #leaderboard {
-      font-size: 0.6rem;
-      text-align: center;
-      max-height: 15vh;
-      overflow-y: auto;
-    }
-
-    #leaderboard h2 {
-      font-size: 0.8rem;
-      margin: 4px 0;
-    }
-
-    #gameOver {
-      font-size: 2rem;
-      color: red;
-      display: none;
-    }
-
-    #controls, #instructions {
-      display: none;
-    }
-  </style>
 </head>
 <body>
   <div id="game-container">
@@ -135,18 +36,17 @@
 
   <script src="script.js"></script>
   <script>
-    let dropInterval = 600; // schnellere Geschwindigkeit
+    let dropInterval = 600;
 
-    // Button-Zuweisung sicherstellen
     window.addEventListener("load", () => {
-      document.getElementById('btn-left')?.addEventListener('click', () => playerMove(-1));
-      document.getElementById('btn-right')?.addEventListener('click', () => playerMove(1));
-      document.getElementById('btn-down')?.addEventListener('click', () => playerDrop());
-      document.getElementById('btn-rotate')?.addEventListener('click', () => playerRotate(1));
+      document.getElementById('btn-left').addEventListener('click', () => playerMove(-1));
+      document.getElementById('btn-right').addEventListener('click', () => playerMove(1));
+      document.getElementById('btn-down').addEventListener('click', () => playerDrop());
+      document.getElementById('btn-rotate').addEventListener('click', () => playerRotate(1));
 
-      document.getElementById('startBtn')?.addEventListener('click', () => startGame());
-      document.getElementById('restartBtn')?.addEventListener('click', () => startGame());
-      document.getElementById('quitBtn')?.addEventListener('click', () => endGame(true));
+      document.getElementById('startBtn').addEventListener('click', () => startGame());
+      document.getElementById('restartBtn').addEventListener('click', () => restartGame());
+      document.getElementById('quitBtn').addEventListener('click', () => endGame(true));
     });
   </script>
 </body>
