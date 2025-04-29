@@ -100,6 +100,19 @@ window.addEventListener('keydown', e => {
   }
 });
 
+// Touch-Steuerung
+const btnLeft = document.getElementById('btn-left');
+const btnRight = document.getElementById('btn-right');
+const btnDown = document.getElementById('btn-down');
+const btnRotate = document.getElementById('btn-rotate');
+
+if (btnLeft && btnRight && btnDown && btnRotate) {
+  btnLeft.addEventListener('touchstart', e => { e.preventDefault(); playerMove(-1); });
+  btnRight.addEventListener('touchstart', e => { e.preventDefault(); playerMove(1); });
+  btnDown.addEventListener('touchstart', e => { e.preventDefault(); playerDrop(); });
+  btnRotate.addEventListener('touchstart', e => { e.preventDefault(); playerRotate(1); });
+}
+
 function createPiece(type) {
   return {
     T: [[0,0,0],[1,1,1],[0,1,0]],
