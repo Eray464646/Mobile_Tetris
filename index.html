@@ -6,6 +6,27 @@
   <title>Retro Tetris</title>
   <link rel="stylesheet" href="style.css?v=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    @media (max-width: 600px) {
+      #controls, #leaderboard, #instructions {
+        position: static;
+        width: 100%;
+        max-width: 320px;
+        margin: 10px auto;
+        display: block;
+      }
+      #controls button, #controls input, #controls select {
+        width: 100%;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+      #controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 <body tabindex="0">
   <h1 id="title">TETRIS</h1>
