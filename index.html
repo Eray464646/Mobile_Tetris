@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Retro Tetris</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
 <body tabindex="0">
   <h1 id="title">TETRIS</h1>
@@ -14,7 +14,7 @@
     <div id="scoreboard">Punkte: <span id="score">0</span></div>
 
     <div id="controls">
-      <input type="text" id="profileName" placeholder="Name eingeben">
+      <input type="text" id="profileName" placeholder="Name eingeben" />
       <button id="createProfile">Profil erstellen</button>
       <div class="profile-select-wrapper">
         <select id="profileSelect"></select>
@@ -23,10 +23,11 @@
       <button id="startBtn">Start</button>
       <button id="restartBtn">Neustart</button>
       <button id="quitBtn">Beenden</button>
+
       <div id="mode-select">
-        <label><input type="radio" name="mode" id="modeEasy" checked>Leicht</label>
-        <label><input type="radio" name="mode" id="modeHard">Schwer</label>
-        <label><input type="radio" name="mode" id="modeImpossible">Impossible</label>
+        <label><input type="radio" name="mode" id="modeEasy" checked />Leicht</label>
+        <label><input type="radio" name="mode" id="modeHard" />Schwer</label>
+        <label><input type="radio" name="mode" id="modeImpossible" />Impossible</label>
       </div>
     </div>
 
@@ -45,15 +46,6 @@
 
     <div id="gameOver">Idiot</div>
   </div>
-
-  <!-- Mobile Steuerung -->
-  <div id="touch-controls">
-    <button id="btn-left">←</button>
-    <button id="btn-rotate">⟳</button>
-    <button id="btn-right">→</button>
-    <button id="btn-down">↓</button>
-  </div>
-
   <script src="script.js"></script>
 </body>
 </html>
