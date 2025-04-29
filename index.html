@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
-<body tabindex="0">
+<body>
   <h1 id="title">TETRIS</h1>
   <div id="game-container">
     <canvas id="tetris" width="300" height="600"></canvas>
@@ -33,7 +33,6 @@
       <div id="mode-select">
         <label><input type="radio" name="mode" id="modeEasy" checked>Leicht</label>
         <label><input type="radio" name="mode" id="modeHard">Schwer</label>
-        <label><input type="radio" name="mode" id="modeImpossible">Impossible</label>
       </div>
     </div>
 
@@ -43,13 +42,10 @@
       <ol id="scoresList"></ol>
     </div>
 
-    <!-- Steuerungs-Anleitung -->
+    <!-- Steuerungs-Anleitung unten rechts -->
     <div id="instructions">
       <h3>Steuerung</h3>
-      <div class="instruction-row"><kbd>←</kbd><span>Links</span></div>
-      <div class="instruction-row"><kbd>→</kbd><span>Rechts</span></div>
-      <div class="instruction-row"><kbd>↓</kbd><span>Schnell fallen</span></div>
-      <div class="instruction-row"><kbd>W</kbd><span>Drehen</span></div>
+      <kbd>←</kbd><kbd>→</kbd><kbd>↓</kbd><kbd>W</kbd>
     </div>
 
     <!-- Game Over Overlay -->
