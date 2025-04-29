@@ -2,12 +2,12 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retro Tetris</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
-<body tabindex="0">
+<body>
   <h1 id="title">TETRIS</h1>
   <div id="game-container">
     <canvas id="tetris" width="300" height="600"></canvas>
@@ -42,6 +42,13 @@
       <div class="instruction-row"><kbd>→</kbd><span>Rechts</span></div>
       <div class="instruction-row"><kbd>↓</kbd><span>Schnell fallen</span></div>
       <div class="instruction-row"><kbd>W</kbd><span>Drehen</span></div>
+    </div>
+
+    <div id="touch-controls">
+      <button id="btn-left">◀</button>
+      <button id="btn-down">▼</button>
+      <button id="btn-right">▶</button>
+      <button id="btn-rotate">⟳</button>
     </div>
 
     <div id="gameOver">Idiot</div>
