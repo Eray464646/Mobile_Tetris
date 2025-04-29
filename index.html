@@ -4,89 +4,90 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retro Tetris</title>
-  <link rel="stylesheet" href="style.css?v=1.1" />
+  <link rel="stylesheet" href="style.css?v=1.2" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
-    body {
+    html, body {
       margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+      padding: 0;
+      font-family: 'Press Start 2P', monospace;
+      background-color: #0b0b0b;
+      color: #00ffde;
       overflow: hidden;
     }
     #game-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      max-width: 100vw;
-      max-height: 100vh;
+      justify-content: space-between;
+      height: 100vh;
+      padding: 5px;
     }
     canvas {
-      width: 100vw;
-      max-width: 320px;
+      width: 90vw;
       height: auto;
-      aspect-ratio: 1 / 2;
+      max-height: 50vh;
+      background: rgba(17, 17, 17, 0.85);
+      border: 3px solid #00ffde;
+      box-shadow: 0 0 10px #00ffde;
+    }
+    #scoreboard {
+      font-size: 0.8rem;
+      margin: 4px 0;
     }
     #touch-controls {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin: 8px 0;
+      gap: 6px;
+      margin-top: 6px;
     }
     #touch-controls button {
-      padding: 12px;
-      font-size: 1.2rem;
+      padding: 8px 10px;
+      font-size: 1rem;
       background: #00ffde;
       border: none;
-      border-radius: 6px;
-      box-shadow: 0 0 10px #00ffde;
+      border-radius: 4px;
+      box-shadow: 0 0 5px #00ffde;
     }
-    #controls, #leaderboard, #instructions {
+    #leaderboard {
+      font-size: 0.6rem;
+      text-align: center;
+      max-height: 20vh;
+      overflow-y: auto;
+    }
+    #leaderboard h2 {
+      font-size: 0.8rem;
+      margin: 4px 0;
+    }
+    #title {
+      font-size: 1.4rem;
+      margin: 4px 0;
+      text-shadow: 0 0 5px #00ffde;
+    }
+    #gameOver {
+      font-size: 2rem;
+      color: red;
+      display: none;
+    }
+    #controls {
       display: none;
     }
   </style>
 </head>
 <body tabindex="0">
-  <h1 id="title">TETRIS</h1>
   <div id="game-container">
+    <h1 id="title">TETRIS</h1>
+    <div id="scoreboard">Punkte: <span id="score">0</span></div>
     <canvas id="tetris" width="300" height="600"></canvas>
-
     <div id="touch-controls">
       <button id="btn-left">◀</button>
       <button id="btn-down">▼</button>
       <button id="btn-right">▶</button>
       <button id="btn-rotate">⟳</button>
     </div>
-
-    <div id="scoreboard">Punkte: <span id="score">0</span></div>
-    <div id="controls">
-      <input type="text" id="profileName" placeholder="Name eingeben" />
-      <button id="createProfile">Profil erstellen</button>
-      <div class="profile-select-wrapper">
-        <select id="profileSelect"></select>
-        <button id="deleteProfile" title="Profil löschen">✕</button>
-      </div>
-      <button id="startBtn">Start</button>
-      <button id="restartBtn">Neustart</button>
-      <button id="quitBtn">Beenden</button>
-      <div id="mode-select">
-        <label><input type="radio" name="mode" id="modeEasy" checked />Leicht</label>
-        <label><input type="radio" name="mode" id="modeHard" />Schwer</label>
-        <label><input type="radio" name="mode" id="modeImpossible" />Impossible</label>
-      </div>
-    </div>
     <div id="leaderboard">
       <h2>High Scores</h2>
       <ol id="scoresList"></ol>
-    </div>
-    <div id="instructions">
-      <h3>Steuerung</h3>
-      <div class="instruction-row"><kbd>←</kbd><span>Links</span></div>
-      <div class="instruction-row"><kbd>→</kbd><span>Rechts</span></div>
-      <div class="instruction-row"><kbd>↓</kbd><span>Schnell fallen</span></div>
-      <div class="instruction-row"><kbd>W</kbd><span>Drehen</span></div>
     </div>
     <div id="gameOver">Idiot</div>
   </div>
